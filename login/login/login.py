@@ -1,6 +1,7 @@
 import mysql.connector
 from dotenv import load_dotenv
 import os
+import pwinput
 load_dotenv()
 
 try:
@@ -10,10 +11,10 @@ try:
         password=os.getenv("password"),
         database=os.getenv("database")
     )
-    print("DB successfully connected")
     
-    user = input("Gimme you USERNAME: ")
-    password = input("Gimme you PASSWORD: ")
+    print("*****LOGIN*****")
+    user = input("Enter you username: ")
+    password = pwinput.pwinput("Enter your password: ")
     
     cursor = conn.cursor()
     cursor.execute(
@@ -22,7 +23,7 @@ try:
     result = cursor.fetchone()
     
     if result:
-        print("You are successfully Login, Welcome")
+        print("You are successfully Login")
     else:
         print("Access denied")
 except mysql.connector.Error as error:

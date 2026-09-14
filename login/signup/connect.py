@@ -1,6 +1,7 @@
 import mysql.connector
 import os
 from dotenv import load_dotenv
+import pwinput
 
 load_dotenv()
 
@@ -12,12 +13,17 @@ try:
         password=os.getenv("password")
         
     )
-    print("Successfully connected")
+
     
     cursor = conn.cursor(buffered=True)
     
+    print("*****CREATE YOU ACCOUNT*****")
+    
+    email = input("Enter you email: ")
     user = input("Enter your Username: ")
-    password = input("Enter you Password: ")
+    password = pwinput.pwinput("Enter you Password: ")
+    
+
     
     cursor.execute(
     "select username from users where username = %s", (user,)
@@ -26,13 +32,15 @@ try:
     
     if result:
         print("User exist")
+        exit()
 
     
     cursor.execute(
-    "INSERT INTO users (username, password) VALUES (%s, %s)",
-    (user, password)
+    "INSERT INTO users (username, password, email) VALUES (%s, %s, %s)",
+    (user, password, email)
     
     )
+    print("Account successfully created!")
     
     conn.commit()
     
