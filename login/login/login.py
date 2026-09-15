@@ -12,7 +12,7 @@ try:
         database=os.getenv("database")
     )
     
-    print("*****LOGIN*****")
+    print("*******LOGIN*******")
     user = input("Enter you username: ")
     password = pwinput.pwinput("Enter your password: ")
     
@@ -25,7 +25,7 @@ try:
     if result:
         print("You are successfully Login")
     else:
-        print("Access denied")
+        print("Access blocked")
 except mysql.connector.Error as error:
     print("DB connection failed")
     print(error)
