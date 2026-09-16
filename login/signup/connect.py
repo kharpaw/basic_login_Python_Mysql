@@ -2,6 +2,7 @@ import mysql.connector
 import os
 from dotenv import load_dotenv
 import pwinput
+import bcrypt
 
 load_dotenv()
 
@@ -13,9 +14,10 @@ try:
         password=os.getenv("password")
         
     )
+    
 
     
-    cursor = conn.cursor(buffered=True)
+    cursor = conn.cursor(buffered=True)  
     
     print("*****CREATE YOU ACCOUNT*****")
     
@@ -34,10 +36,15 @@ try:
         print("User exist")
         exit()
 
+    hashed_password = bcrypt.hashpw(
+    password.encode("utf-8"),
+    bcrypt.gensalt()
+    )
+    
     
     cursor.execute(
     "INSERT INTO users (username, password, email) VALUES (%s, %s, %s)",
-    (user, password, email)
+    (user, hashed_password.decode("utf-8"), email)
     
     )
     print("Account successfully created!")
