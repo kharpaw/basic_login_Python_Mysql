@@ -25,7 +25,9 @@ try:
     user = input("Enter your Username: ")
     password = pwinput.pwinput("Enter you Password: ")
     
-
+    if len(password) < 8:
+        print("You can´t have password less then 8 character")
+        exit()
     
     cursor.execute(
     "select username from users where username = %s", (user,)
