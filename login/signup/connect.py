@@ -52,11 +52,10 @@ try:
     print("Account successfully created!")
     
     conn.commit()
+    cursor.close()
+    conn.close()
     
     
-
-    
-  
 
 except mysql.connector.Error as error:
     print("DB connection failed")
