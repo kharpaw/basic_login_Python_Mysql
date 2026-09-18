@@ -26,7 +26,7 @@ try:
     password = pwinput.pwinput("Enter you Password: ")
     
     if len(password) < 8:
-        print("You can´t have password less then 8 character")
+        print("Password must be 8 character")
         exit()
     
     cursor.execute(
