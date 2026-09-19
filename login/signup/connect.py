@@ -58,5 +58,5 @@ try:
     
 
 except mysql.connector.Error as error:
-    print("DB connection failed")
+    print("Database connection failed")
     print(error)
